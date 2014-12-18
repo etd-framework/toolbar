@@ -1,0 +1,195 @@
+<?php
+/**
+ * Part of the ETD Framework Toolbar Package
+ *
+ * @copyright   Copyright (C) 2015 ETD Solutions, SARL Etudoo. Tous droits réservés.
+ * @license     Apache License 2.0; see LICENSE
+ * @author      ETD Solutions http://etd-solutions.com
+ */
+namespace EtdSolutions\Toolbar;
+
+use EtdSolutions\Toolbar\Button\Button;
+use EtdSolutions\Toolbar\Button\ButtonDropdownSplit;
+use EtdSolutions\Toolbar\Button\ButtonGroup;
+use EtdSolutions\Toolbar\Button\ButtonDropdownSingle;
+use Joomla\Form\Form;
+
+defined('_JEXEC') or die;
+
+class Toolbar {
+
+    /**
+     * @var Toolbar L'instance générale de la barre d'outils.
+     */
+    private static $instance;
+
+    /**
+     * @var array Tableau des boutons d'actions.
+     */
+    protected $buttons = array();
+
+    /**
+     * @var Form Le formulaire utilisé pour filtrer les enregistrements.
+     */
+    protected $filterForm = null;
+
+    /**
+     * @var string Le titre de la page.
+     */
+    protected $title = null;
+
+    /**
+     * Retourne une référence à l'objet global Toolbar, en le créant seulement si besoin.
+     *
+     * @return  Toolbar
+     */
+    public static function getInstance() {
+
+        if (empty(self::$instance)) {
+            self::$instance = new Toolbar;
+        }
+
+        return self::$instance;
+    }
+
+    /**
+     * Méthode pour créer un bouton
+     *
+     * @param string $text    Texte du bouton
+     * @param array  $attribs Tableau des attributs supplémentaires
+     * @param string $icon    Classe CSS Font Awesome (sans le fa-)
+     *
+     * @return Button
+     */
+    public static function createButton($text, $attribs = array(), $icon = '') {
+
+        return new Button($text, $attribs, $icon);
+
+    }
+
+    /**
+     * Méthode pour créer un groupe de bouton.
+     *
+     * @param array $components Tableau des boutons à ajouter au groupe.
+     *
+     * @return ButtonGroup
+     */
+    public static function createButtonGroup($components) {
+
+        $button = new ButtonGroup($components);
+
+        return $button;
+    }
+
+    /**
+     * Méthode pour créer un Split Dropdown
+     *
+     * @param array  $links
+     * @param Button $button
+     *
+     * @return ButtonDropdownSplit
+     */
+    public static function createButtonDropdownSplit($links, $button = null) {
+
+        // Si le bouton n'est pas spécifié, on prend le premier du tableau.
+        if (is_null($button)) {
+            $button = array_shift($links);
+        }
+
+        return new ButtonDropdownSplit($links, $button);
+    }
+
+    /**
+     * Méthode pour créer un dropdown
+     *
+     * @param array  $links
+     * @param Button $button
+     *
+     * @return ButtonDropdownSingle
+     */
+    public static function createButtonDropdownSingle($links, $button = null) {
+
+        return new ButtonDropdownSingle($links, $button);
+    }
+
+    /**
+     * Méthode pour ajouter un bouton à la toolbar.
+     *
+     * @param mixed $button
+     *
+     * @return $this
+     */
+    public function addButton($button) {
+
+        $this->buttons[] = $button;
+
+        return $this;
+
+    }
+
+    /**
+     * Méthode pour ajouter un filtre à la toolbar.
+     *
+     * @param Form $form
+     *
+     * @return $this
+     */
+    public function setFilterForm($form) {
+
+        $this->filterForm = $form;
+
+        return $this;
+
+    }
+
+    /**
+     * Méthode pour définir le titre de page affiché dans la barre d'outils.
+     *
+     * @param string $title
+     *
+     * @return Toolbar
+     */
+    public function setTitle($title) {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * Renvoi le titre de page.
+     *
+     * @return string
+     */
+    public function getTitle() {
+        return $this->title;
+    }
+
+    /**
+     * Retourne le rendu de la barre d'outils.
+     *
+     * @return string code HTML du rendu
+     * @throws \RuntimeException
+     */
+    public function render() {
+
+        // Get the layout path.
+        $path = JPATH_THEME . "/html/layouts/toolbar.php";
+
+        // Check if the layout path was found.
+        if (!file_exists($path)) {
+            throw new \RuntimeException('Toolbar Layout Path Not Found');
+        }
+
+        // Start an output buffer.
+        ob_start();
+
+        // Load the layout.
+        include $path;
+
+        // Get the layout contents.
+        $output = ob_get_clean();
+
+        return $output;
+
+    }
+
+}
