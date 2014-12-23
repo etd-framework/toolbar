@@ -27,7 +27,7 @@ class ButtonGroup {
 
     public function render() {
 
-        $html = '<div class="btn-group"> ';
+        $html = '<div class="btn-group">';
 
         foreach ($this->components as $component) {
 

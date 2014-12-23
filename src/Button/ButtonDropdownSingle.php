@@ -31,7 +31,7 @@ class ButtonDropdownSingle {
         $html = '<div class="btn-group">';
 
         $this->button->setAttribute('class', $this->button->getAttribute('class') . " dropdown-toggle");
-        $this->button->setText($this->button->getText() . '<span class="caret"></span>');
+        $this->button->setText($this->button->getText() . ' <span class="caret"></span>');
         $this->button->setAttribute('data-toggle', 'dropdown');
 
         $html .= $this->button->render();

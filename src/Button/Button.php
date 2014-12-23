@@ -56,11 +56,11 @@ class Button {
         $html = '<a ' . ArrayHelper::toString($this->attribs, '=', ' ') . '>';
 
         if (!empty($this->icon)) {
-            $html .= '<span class="fa fa-' . $this->icon . '"></span>&nbsp;';
+            $html .= '<span class="fa fa-' . $this->icon . '"></span>';
         }
 
         if (!empty($this->text)) {
-            $html .= Text::_($this->text);
+            $html .= '<span class="text">&nbsp;' . Text::_($this->text) . '</span>';
         }
 
         $html .= '</a>';
