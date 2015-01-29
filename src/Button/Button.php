@@ -8,6 +8,7 @@
  */
 namespace EtdSolutions\Toolbar\Button;
 
+use EtdSolutions\Application\Web;
 use Joomla\Language\Text;
 use Joomla\Utilities\ArrayHelper;
 
@@ -27,7 +28,9 @@ class Button {
     public function __construct($text, $attribs = array(), $icon = '') {
 
         if (array_key_exists('title', $attribs)) {
-            $attribs['title'] = Text::_($attribs['title']);
+            $attribs['title'] = Web::getInstance()
+                                   ->getText()
+                                   ->translate($attribs['title']);
         }
 
         $this->attribs = $attribs;
@@ -36,22 +39,29 @@ class Button {
     }
 
     public function setAttribute($name, $value) {
+
         $this->attribs[$name] = $value;
     }
 
     public function getAttribute($name) {
+
         return isset($this->attribs[$name]) ? $this->attribs[$name] : null;
     }
 
     public function setText($text) {
+
         $this->text = $text;
     }
 
     public function getText() {
+
         return $this->text;
     }
 
     public function render() {
+
+        $text = Web::getInstance()
+                   ->getText();
 
         $html = '<a ' . ArrayHelper::toString($this->attribs, '=', ' ') . '>';
 
@@ -60,7 +70,7 @@ class Button {
         }
 
         if (!empty($this->text)) {
-            $html .= '<span class="text">&nbsp;' . Text::_($this->text) . '</span>';
+            $html .= '<span class="text">&nbsp;' . $text->translate($this->text) . '</span>';
         }
 
         $html .= '</a>';
