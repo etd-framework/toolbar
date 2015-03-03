@@ -12,6 +12,7 @@ use EtdSolutions\Toolbar\Button\Button;
 use EtdSolutions\Toolbar\Button\ButtonDropdownSplit;
 use EtdSolutions\Toolbar\Button\ButtonGroup;
 use EtdSolutions\Toolbar\Button\ButtonDropdownSingle;
+use EtdSolutions\Toolbar\Button\Label;
 use Joomla\Form\Form;
 
 defined('_JEXEC') or die;
@@ -50,6 +51,21 @@ class Toolbar {
         }
 
         return self::$instance;
+    }
+
+    /**
+     * Méthode pour créer un texte
+     *
+     * @param string $text    Texte
+     * @param array  $attribs Tableau des attributs supplémentaires
+     * @param string $icon    Classe CSS Font Awesome (sans le fa-)
+     *
+     * @return Label
+     */
+    public static function createLabel($text, $attribs = array(), $icon = '') {
+
+        return new Label($text, $attribs, $icon);
+
     }
 
     /**
