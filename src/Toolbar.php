@@ -6,6 +6,7 @@
  * @license     Apache License 2.0; see LICENSE
  * @author      ETD Solutions http://etd-solutions.com
  */
+
 namespace EtdSolutions\Toolbar;
 
 use EtdSolutions\Toolbar\Button\Button;
@@ -14,8 +15,6 @@ use EtdSolutions\Toolbar\Button\ButtonGroup;
 use EtdSolutions\Toolbar\Button\ButtonDropdownSingle;
 use EtdSolutions\Toolbar\Button\Label;
 use Joomla\Form\Form;
-
-defined('_JEXEC') or die;
 
 class Toolbar {
 
@@ -180,32 +179,12 @@ class Toolbar {
     }
 
     /**
-     * Retourne le rendu de la barre d'outils.
+     * Retourne les boutons.
      *
-     * @return string code HTML du rendu
-     * @throws \RuntimeException
+     * @return array
      */
-    public function render() {
-
-        // Get the layout path.
-        $path = JPATH_THEME . "/html/layouts/toolbar.php";
-
-        // Check if the layout path was found.
-        if (!file_exists($path)) {
-            throw new \RuntimeException('Toolbar Layout Path Not Found');
-        }
-
-        // Start an output buffer.
-        ob_start();
-
-        // Load the layout.
-        include $path;
-
-        // Get the layout contents.
-        $output = ob_get_clean();
-
-        return $output;
-
+    public function getButtons() {
+        return $this->buttons;
     }
 
 }

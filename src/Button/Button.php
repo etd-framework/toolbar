@@ -6,13 +6,11 @@
  * @license     Apache License 2.0; see LICENSE
  * @author      ETD Solutions http://etd-solutions.com
  */
+
 namespace EtdSolutions\Toolbar\Button;
 
-use EtdSolutions\Application\Web;
-use Joomla\Language\Text;
+use EtdSolutions\Language\LanguageFactory;
 use Joomla\Utilities\ArrayHelper;
-
-defined('_JEXEC') or die;
 
 class Button {
 
@@ -28,9 +26,7 @@ class Button {
     public function __construct($text, $attribs = array(), $icon = '') {
 
         if (array_key_exists('title', $attribs)) {
-            $attribs['title'] = Web::getInstance()
-                                   ->getText()
-                                   ->translate($attribs['title']);
+            $attribs['title'] = (new LanguageFactory)->getText()->translate($attribs['title']);
         }
 
         $this->attribs = $attribs;
@@ -60,8 +56,7 @@ class Button {
 
     public function render() {
 
-        $text = Web::getInstance()
-                   ->getText();
+        $text = (new LanguageFactory)->getText();
 
         $html = '<a ' . ArrayHelper::toString($this->attribs, '=', ' ') . '>';
 

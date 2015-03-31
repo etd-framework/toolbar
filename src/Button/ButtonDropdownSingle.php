@@ -6,14 +6,10 @@
  * @license     Apache License 2.0; see LICENSE
  * @author      ETD Solutions http://etd-solutions.com
  */
+
 namespace EtdSolutions\Toolbar\Button;
 
-use Joomla\Language\Text;
-
-defined('_JEXEC') or die;
-
 class ButtonDropdownSingle {
-
 
     /**
      * @var array $links tableau avec les sous boutons et leur lien
