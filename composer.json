@@ -16,7 +16,7 @@
   "require": {
     "php": ">=5.4",
     "joomla/form": "~2.0@dev",
-    "etdsolutions/language": "2.0.*@dev",
+    "etdsolutions/language": "@dev",
     "joomla/utilities": "~1.0"
   },
   "autoload": {
