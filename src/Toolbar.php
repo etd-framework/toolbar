@@ -187,4 +187,13 @@ class Toolbar {
         return $this->buttons;
     }
 
+    /**
+     * Retourne le formulaire de filtres.
+     *
+     * @return array
+     */
+    public function getFilterForm() {
+        return $this->filterForm;
+    }
+
 }
