@@ -21,6 +21,18 @@ class ButtonDropdownSingle {
      */
     protected $button = null;
 
+    protected $attribs = array();
+
+    public function setAttribute($name, $value) {
+
+        $this->attribs[$name] = $value;
+    }
+
+    public function getAttribute($name) {
+
+        return isset($this->attribs[$name]) ? $this->attribs[$name] : null;
+    }
+
     public function render(){
 
 
@@ -32,7 +44,7 @@ class ButtonDropdownSingle {
 
         $html .= $this->button->render();
 
-        $html .= '<ul class="dropdown-menu pull-right" role="menu">';
+        $html .= '<ul class="' . $this->getAttribute('class') . ' dropdown-menu pull-right" role="menu">';
 
         foreach($this->links as $link) {
             $link->setAttribute('class', '');
@@ -45,7 +57,7 @@ class ButtonDropdownSingle {
     }
 
 
-    function __construct($links, $button = null)
+    function __construct($links, $button = null, $attribs = array())
     {
 
         // Si le bouton n'est pas spécifié, on prend le premier du tableau.
@@ -55,6 +67,7 @@ class ButtonDropdownSingle {
 
         $this->button = $button;
         $this->links  = $links;
+        $this->attribs = $attribs;
     }
 
 

@@ -102,17 +102,18 @@ class Toolbar {
      *
      * @param array  $links
      * @param Button $button
+     * @param array  $attribs
      *
      * @return ButtonDropdownSplit
      */
-    public static function createButtonDropdownSplit($links, $button = null) {
+    public static function createButtonDropdownSplit($links, $button = null, $attribs = []) {
 
         // Si le bouton n'est pas spécifié, on prend le premier du tableau.
         if (is_null($button)) {
             $button = array_shift($links);
         }
 
-        return new ButtonDropdownSplit($links, $button);
+        return new ButtonDropdownSplit($links, $button, $attribs);
     }
 
     /**
@@ -120,12 +121,13 @@ class Toolbar {
      *
      * @param array  $links
      * @param Button $button
+     * @param array  $attribs
      *
      * @return ButtonDropdownSingle
      */
-    public static function createButtonDropdownSingle($links, $button = null) {
+    public static function createButtonDropdownSingle($links, $button = null, $attribs = []) {
 
-        return new ButtonDropdownSingle($links, $button);
+        return new ButtonDropdownSingle($links, $button, $attribs);
     }
 
     /**
