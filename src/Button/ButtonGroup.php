@@ -11,15 +11,28 @@ namespace EtdSolutions\Toolbar\Button;
 
 class ButtonGroup {
 
+    protected $attribs = [];
+
     /**
      * @var array Les boutons du btn-group
      */
-    protected $components = array();
+    protected $components = [];
 
-    function __construct(array $components) {
+    public function __construct(array $components, $attribs = []) {
 
         $this->components = $components;
+        $this->attribs    = $attribs;
 
+    }
+
+    public function setAttribute($name, $value) {
+
+        $this->attribs[$name] = $value;
+    }
+
+    public function getAttribute($name) {
+
+        return isset($this->attribs[$name]) ? $this->attribs[$name] : null;
     }
 
     public function render() {

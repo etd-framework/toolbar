@@ -26,7 +26,7 @@ class Toolbar {
     /**
      * @var array Tableau des boutons d'actions.
      */
-    protected $buttons = array();
+    protected $buttons = [];
 
     /**
      * @var Form Le formulaire utilisé pour filtrer les enregistrements.
@@ -37,6 +37,10 @@ class Toolbar {
      * @var string Le titre de la page.
      */
     protected $title = null;
+
+    /**
+     * @var string Le soustitre de la page
+     */
     protected $subtitle = null;
 
     /**
@@ -62,7 +66,7 @@ class Toolbar {
      *
      * @return Label
      */
-    public static function createLabel($text, $attribs = array(), $icon = '') {
+    public static function createLabel($text, $attribs = [], $icon = '') {
 
         return new Label($text, $attribs, $icon);
 
@@ -77,7 +81,7 @@ class Toolbar {
      *
      * @return Button
      */
-    public static function createButton($text, $attribs = array(), $icon = '') {
+    public static function createButton($text, $attribs = [], $icon = '') {
 
         return new Button($text, $attribs, $icon);
 
@@ -87,14 +91,14 @@ class Toolbar {
      * Méthode pour créer un groupe de bouton.
      *
      * @param array $components Tableau des boutons à ajouter au groupe.
+     * @param array $attribs
      *
      * @return ButtonGroup
      */
-    public static function createButtonGroup($components) {
+    public static function createButtonGroup($components, $attribs = []) {
 
-        $button = new ButtonGroup($components);
+        return new ButtonGroup($components, $attribs);
 
-        return $button;
     }
 
     /**
@@ -168,7 +172,9 @@ class Toolbar {
      * @return Toolbar
      */
     public function setTitle($title) {
+
         $this->title = $title;
+
         return $this;
     }
 
@@ -178,6 +184,7 @@ class Toolbar {
      * @return string
      */
     public function getTitle() {
+
         return $this->title;
     }
 
@@ -189,7 +196,9 @@ class Toolbar {
      * @return Toolbar
      */
     public function setSubtitle($subtitle) {
+
         $this->subtitle = $subtitle;
+
         return $this;
     }
 
@@ -199,6 +208,7 @@ class Toolbar {
      * @return string
      */
     public function getSubtitle() {
+
         return $this->subtitle;
     }
 
@@ -208,6 +218,7 @@ class Toolbar {
      * @return array
      */
     public function getButtons() {
+
         return $this->buttons;
     }
 
@@ -217,6 +228,7 @@ class Toolbar {
      * @return array
      */
     public function getFilterForm() {
+
         return $this->filterForm;
     }
 
